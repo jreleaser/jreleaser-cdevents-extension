@@ -1,0 +1,122 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2022-2024 The JReleaser authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+config {
+    info {
+        description = 'CDEvents extension for JReleaser'
+        inceptionYear = '2022'
+        tags = ['observability', 'monitoring', 'cd/cd', 'cdevents']
+        bytecodeVersion = 8
+
+        links {
+            website      = "https://github.com/jreleaser/${project.rootProject.name}"
+            issueTracker = "https://github.com/jreleaser/${project.rootProject.name}/issues"
+            scm          = "https://github.com/jreleaser/${project.rootProject.name}.git"
+        }
+
+        scm {
+            url                 = "https://github.com/jreleaser/${project.rootProject.name}"
+            connection          = "scm:git:https://github.com/jreleaser/${project.rootProject.name}.git"
+            developerConnection = "scm:git:git@github.com:jreleaser/${project.rootProject.name}.git"
+        }
+
+        specification {
+            enabled = true
+        }
+
+        implementation {
+            enabled = true
+        }
+    }
+
+    docs {
+        javadoc {
+            autoLinks {
+                enabled = false
+            }
+        }
+    }
+
+    licensing {
+        mappings += [
+            gdsl: 'SLASHSTAR_STYLE',
+            dsld: 'SLASHSTAR_STYLE'
+        ]
+    }
+
+    quality {
+        checkstyle {
+            toolVersion = checkstyleVersion
+            aggregate {
+                enabled = false
+            }
+        }
+    }
+}
+
+repositories {
+    gradlePluginPortal()
+    mavenLocal()
+}
+
+tasks.withType(GenerateModuleMetadata) {
+    enabled = false
+}
+
+tasks.withType(JavaCompiler) {
+    options.compilerArgs += ['-Duser.language=en', '-Duser.country=US']
+}
+
+license {
+    exclude('build/**')
+}
+
+jar {
+    manifest {
+        attributes('Automatic-Module-Name': 'org.jreleaser.extensions.cdevents')
+    }
+}
+
+dependencies {
+    compileOnly "org.jreleaser:jreleaser-model-api:$jreleaserVersion"
+    compileOnly "org.jreleaser:jreleaser-logger-api:$jreleaserVersion"
+    compileOnly "org.jreleaser:jreleaser-utils:$jreleaserVersion"
+    compileOnly "org.slf4j:slf4j-api:$slf4jVersion"
+
+    platform "com.fasterxml.jackson:jackson-bom:$jacksonVersion"
+    api "dev.cdevents:cdevents-sdk-java:$cdeventsVersion"
+    api "io.cloudevents:cloudevents-core:$cloudeventsVersion"
+    api "io.cloudevents:cloudevents-http-basic:$cloudeventsVersion"
+    api "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    api "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    api "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
+    api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+
+    compileOnly "org.kordamp.jipsy:jipsy-annotations:$jipsyVersion"
+    annotationProcessor "org.kordamp.jipsy:jipsy-processor:$jipsyVersion"
+    
+    testImplementation "org.junit.jupiter:junit-jupiter:$junit5Version"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit5Version"
+    testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
+}
+
+test {
+    useJUnitPlatform()
+}
