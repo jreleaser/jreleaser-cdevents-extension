@@ -14,3 +14,4 @@ CDEvents extension for JReleaser.
 == Resources
 
  * link:https://jreleaser.org/guide/latest/configuration/extensions.html[Configuration DSL]
+ * link:https://jreleaser.org/guide/latest/extensions/extensions/jreleaser-cdevents.html[Documentation]

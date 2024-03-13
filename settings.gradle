@@ -54,6 +54,7 @@ enforce {
     
     rule(enforcer.rules.ForceDependencies) { r ->
         r.dependencies.addAll "org.codehaus.plexus:plexus-utils:$plexusVersion",
+            "com.ethlo.time:itu:$ituVersion",
             "com.fasterxml.jackson.core:jackson-core:$jacksonVersion",
             "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
             "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion",
