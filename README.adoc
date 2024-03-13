@@ -2,7 +2,7 @@
 :project-owner:   jreleaser
 :project-name:    jreleaser-cdevents-extension
 :project-group:   org.jreleaser.extensions
-:project-version: 1.0.0-SNAPSHOT
+:project-version: 1.0.0
 
 image:https://img.shields.io/github/actions/workflow/status/{project-owner}/{project-name}/early-access.yml?branch=main&logo=github&label=Build["Build Status", link="https://github.com/{project-owner}/{project-name}/actions"]
 image:https://img.shields.io/maven-central/v/{project-group}/{project-artifactId}?logo=apache%20maven[Download, link="https://search.maven.org/#search|ga|1|g:{project-group} AND a:{project-artifactId}"]
